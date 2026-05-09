@@ -2,8 +2,11 @@
 import fastf1
 import pandas as pd
 import streamlit as st
+import os
 
-fastf1.Cache.enable_cache('cache')
+os.makedirs("cache", exist_ok=True)
+
+fastf1.Cache.enable_cache("cache")
 
 TRACK_LIST = [
     "Bahrain",
