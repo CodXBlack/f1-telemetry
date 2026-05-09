@@ -27,7 +27,21 @@ DRIVER_CODES = [
 ]
 
 @st.cache_data
+@st.cache_data
 def load_session_cached(year, track, session_type):
+
+    session = fastf1.get_session(year, track, session_type)
+
+    session.load(
+        laps=True,
+        telemetry=True,
+        weather=True,
+        messages=True
+    )
+
+    drivers = session.laps['Driver'].dropna().unique().tolist()
+
+    return session, drivers
     session = fastf1.get_session(year, track, session_type)
     session.load()
     drivers = session.laps['Driver'].unique().tolist()
